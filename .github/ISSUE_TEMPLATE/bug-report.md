@@ -1,3 +1,11 @@
+---
+name: Bug report type 2
+about: custom bug report
+title: ''
+labels: ''
+assignees: ''
+
+---
 # Title
 
 ## Description
