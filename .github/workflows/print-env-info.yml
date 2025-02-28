@@ -26,9 +26,9 @@ jobs:
       run: uname -a
     - name: Print ip info
       run: |
-        ip adress
+        ip address
         ip route
         ip link
-        ip neighbour
+        ip neighbor
     - name: Print locale info
       run: locale
