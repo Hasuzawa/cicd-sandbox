@@ -1,5 +1,5 @@
 ---
-name: Valid Report 1
+name: Valid 1
 about: minium report
 ---
 **Bold Title**
