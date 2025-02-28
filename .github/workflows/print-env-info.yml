@@ -18,7 +18,17 @@ jobs:
       run: echo ${{ github }}
     - name: List binaries (commands you can use)
       run: ls -al /bin
+    - name: List unix resources
+      run: ls -al /usr/bin
     - name: Print current directory
       run: pwd
     - name: Print kernel
       run: uname -a
+    - name: Print ip info
+      run: |
+        ip adress
+        ip route
+        ip link
+        ip neighbour
+    - name: Print locale info
+      run: locale
