@@ -1,1 +1,5 @@
 blank_issues_enabled: false
+contact_links:
+- name: Homepage of Repository
+  url: https://github.com/Hasuzawa/cicd-sandbox
+  about: Go to Github repo
