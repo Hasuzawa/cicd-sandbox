@@ -1,0 +1,23 @@
+name: Print env and related info
+
+on:
+  workflow_dispatch:
+    inputs:
+      dummy_var:
+        default: placeholder-value
+
+jobs:
+  print_env:
+    steps:
+    - name: Print env variables
+      runs: printenv
+    - name: Print inputs
+      runs: echo ${{ inputs }}
+    - name: Print github
+      runs: echo ${{ github }}
+    - name: List binaries (commands you can use)
+      runs: ls -al /bin
+    - name: Print current directory
+      runs: pwd
+    - name: Print kernel
+      runs: uname -a
