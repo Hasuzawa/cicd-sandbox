@@ -1,0 +1,43 @@
+name: This workflow is meant to be used by other workflow
+run_name: Workflow to be invoked
+
+on:
+  workflow_call:
+    inputs:
+      x:
+        type: number
+        default: 8
+      y:
+        type: number
+        default: 17
+
+jobs:
+  calculate:
+    runs-on: ubuntu-latest
+    outputs:
+      sum: ${{ steps.sum.outputs }}
+      difference: ${{ steps.difference.outputs }}
+    steps:
+    - name: Show env GITHUB_OUTPUT
+      run: |
+        echo $GITHUB_OUTPUT
+        ls -al $GITHUB_OUTPUT
+        cat $GITHUB_OUTPUT
+    - name: Print inputs
+      run: |
+        echo x: ${{ inputs.x }}  y: ${{ inputs.y }}
+    - name: Evaluate sum
+      id: sum
+      run: |
+        sum=expr ${{ inputs.x }} + ${{ inputs.y }}
+        echo "sum=$sum" >> $GITHUB_OUTPUT
+    - name: Evaluate difference
+      id: difference
+      run: |
+        difference=$(expr ${{ inputs.x }} - ${{ inputs.y }})
+        echo "difference=$difference" >> $GITHUB_OUTPUT
+    - name: Show content of GITHUB_OUTPUT again
+      run: |
+        echo $GITHUB_OUTPUT
+        ls -al $GITHUB_OUTPUT
+        cat $GITHUB_OUTPUT
