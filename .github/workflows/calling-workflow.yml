@@ -1,0 +1,19 @@
+name: Workflow that calls
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Call another workflow
+      id: calling
+      uses: .github/workflows/callable-workflow.yml
+      with:
+        x: 6
+        y: 19
+    - name: Show output of called workflow
+      run: |
+        echo ${{ steps.calling.outputs.sum }}
+        echo ${{ steps.calling.outputs.differnce }}
