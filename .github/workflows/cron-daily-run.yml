@@ -1,0 +1,12 @@
+name: Cron Run Daily
+
+on:
+  schedule:
+  - cron: "0 0 * * *"
+
+jobs:
+  daily_task:
+    runs-on: ubuntu-latest
+    steps:
+    - name: This workflow is run daily
+      run: echo
