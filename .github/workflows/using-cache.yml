@@ -1,0 +1,35 @@
+name: Using Cache (Artifact)
+
+on:
+  workflow_dispatch:
+    inputs:
+      filename:
+        type: string
+        default: github-workflow.log
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create log file
+      run: |
+        cat <<-EOF > /var/${{ inputs.filename }}
+          This is a log generated in github actions.
+          It will be stored in cache.
+        EOF
+        echo $(date) >> /var/${{ inputs.filename }}
+    - name: Upload
+      uses: actions@upload-artifact@v4
+      with:
+        name: ${{ inputs.filename }}
+        path: /var/${{ inputs.filename }}
+        retention-days: 1
+  use:
+    runs-on: ubuntu-latest
+    needs: upload
+    steps:
+    - name: Download
+      uses: actions/download-artifact@v4
+      with: ${{ inputs.filename }}
+    - name: Print file
+      run: cat ${{ inputs.filename }}
