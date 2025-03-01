@@ -1,0 +1,33 @@
+name: Different runner OS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print matrix variables
+      run: echo ${{ matrix.os }}
+    - name: Print runner os
+      run: echo runner.os
+    - name: Linux only command
+      run: ip address
+  mac:
+    runs-on: macos-14 # M1 chip Mac
+    steps:
+    - name: Print matrix variables
+      run: echo ${{ matrix.os }}
+    - name: Print runner os
+      run: echo runner.os
+    - name: Mac only command
+      run: defaults read
+  windows:
+    runs-on: windows-latest
+    steps:
+    - name: Print matrix variables
+      run: echo ${{ matrix.os }}
+    - name: Print runner os
+      run: echo runner.os
+    - name: Windows only command
+      run: wmic cpu list full
