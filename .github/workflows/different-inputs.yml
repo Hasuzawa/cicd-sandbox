@@ -34,6 +34,6 @@ jobs:
         echo ${{ inputs.num1 }}
         echo ${{ inputs.num2 }}
         echo ${{ inputs.comment }}
-        echo ${{ inputs.squre }}
+        echo ${{ inputs.square }}
         echo ${{ inputs.weather }}
         echo ${{ inputs }}
