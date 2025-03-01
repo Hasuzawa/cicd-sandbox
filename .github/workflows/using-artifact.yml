@@ -1,4 +1,4 @@
-name: Using Cache (Artifact)
+name: Using Artifact
 
 on:
   workflow_dispatch:
