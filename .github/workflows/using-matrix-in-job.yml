@@ -1,0 +1,26 @@
+name: Using matrix in job
+
+on:
+  workflow_disptach:
+
+jobs:
+  study:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        subject:
+        - Mathematics
+        - English
+        - Geography
+        action:
+        - Study
+        - Prepare Exam
+        time:
+        - morning
+        - night
+    steps:
+    - name: Perform action
+      run: |
+        echo ${{ matrix.action }} \
+        for ${{ matrix.subject }} \
+        in ${{ matrix.time }}
