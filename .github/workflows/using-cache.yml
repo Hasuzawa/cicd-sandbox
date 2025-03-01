@@ -13,16 +13,16 @@ jobs:
     steps:
     - name: Create log file
       run: |
-        cat <<-EOF > /var/${{ inputs.filename }}
+        cat <<-EOF > ${{ inputs.filename }}
           This is a log generated in github actions.
           It will be stored in cache.
         EOF
-        echo $(date) >> /var/${{ inputs.filename }}
+        echo $(date) >> ${{ inputs.filename }}
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
         name: ${{ inputs.filename }}
-        path: /var/${{ inputs.filename }}
+        path: ${{ inputs.filename }}
         retention-days: 1
   download:
     runs-on: ubuntu-latest
