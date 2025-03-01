@@ -30,7 +30,7 @@ jobs:
       if: ${{ ! needs.prepare.outputs.prepared }}
       run: exit 1
     - name: Mix Ingredients
-      name: echo ingredients mixed
+      run: echo ingredients mixed
     outputs:
       dough: dough
       mixed: true
