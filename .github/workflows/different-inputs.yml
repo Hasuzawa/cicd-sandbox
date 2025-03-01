@@ -1,0 +1,38 @@
+name: different input types
+on:
+  workflow_dispatch:
+    input:
+      num1:
+        type: number
+        description: num1
+        required: true
+      num2:
+        type: number
+        description: num2
+        required: true
+      comment:
+        type: string
+        description: any comment
+        default: ok
+      square:
+        type: boolean
+        description: square the result
+      weather:
+        type: choice
+        options:
+        - sunny
+        - rain
+        - snow
+
+jobs:
+  print:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Echo inputs
+      run: |
+        echo ${{ inputs.num1 }}
+        echo ${{ inputs.num2 }}
+        echo ${{ inputs.comment }}
+        echo ${{ inputs.squre }}
+        echo ${{ inputs.weather }}
+        echo ${{ inputs }}
