@@ -5,7 +5,7 @@ on:
 
 jobs:
   call: # notice how we use another workflow at the job level, not step level
-    uses: .github/workflows/callable-workflow.yml
+    uses: .github/workflows/callable-workflow.yml@latest
     with:
       x: 6
       y: 19
