@@ -10,6 +10,15 @@ on:
       y:
         type: number
         default: 17
+    outputs:
+      sum:
+        type: number
+        description: The sum of inputs
+        value: ${{ jobs.calculate.outputs.sum }}
+      difference:
+        type: number
+        description: The difference of inputs
+        value: ${{ jobs.calculate.outputs.difference }}
 
 jobs:
   calculate:
