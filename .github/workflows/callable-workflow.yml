@@ -1,5 +1,5 @@
-name: This workflow is meant to be used by other workflow
-run_name: Workflow to be invoked
+name: Callable Workflow
+run_name: Called Workflow
 
 on:
   workflow_call:
