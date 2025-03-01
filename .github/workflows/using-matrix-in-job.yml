@@ -1,7 +1,7 @@
 name: Using matrix in job
 
 on:
-  workflow_disptach:
+  workflow_dispatch:
 
 jobs:
   study:
