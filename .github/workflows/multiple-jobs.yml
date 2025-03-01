@@ -10,17 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Print Job Name
-      runs: echo now running ${{ github.job }}
+      run: echo now running ${{ github.job }}
   job_B:
     runs-on: ubuntu-latest
     steps:
     - name: Print Job Name
-      runs: echo now running ${{ github.job }}
+      run: echo now running ${{ github.job }}
   job_C:
     runs-on: ubuntu-latest
     steps:
     - name: Print Job Name
-      runs: echo now running ${{ github.job }}
+      run: echo now running ${{ github.job }}
 
   # specify dependency between jobs
   job_D:
@@ -28,7 +28,7 @@ jobs:
     needs: job_F
     steps:
     - name: Print Job Name
-      runs: echo now running ${{ github.job }}
+      run: echo now running ${{ github.job }}
   job_E:
     runs-on: ubuntu-latest
     needs:
@@ -36,14 +36,14 @@ jobs:
     - job_G
     steps:
     - name: Print Job Name
-      runs: echo now running ${{ github.job }}
+      run: echo now running ${{ github.job }}
   job_F:
     runs-on: ubuntu-latest
     steps:
     - name: Print Job Name
-      runs: echo now running ${{ github.job }}
+      run: echo now running ${{ github.job }}
   job_G:
     runs-on: ubuntu-latest
     steps:
     - name: Print Job Name
-      runs: echo now running ${{ github.job }}
+      run: echo now running ${{ github.job }}
