@@ -25,6 +25,6 @@ jobs:
       run: tail -f /dev/null
       continue-on-error: true
     - name: Print last step status
-      run: echo steps.hanging-step.status
+      run: echo ${{ steps.hanging-step.status }}
     - name: End
       run: echo end
