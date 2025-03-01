@@ -18,12 +18,22 @@ jobs:
           It will be stored in cache.
         EOF
         echo $(date) >> ${{ inputs.filename }}
+    - name: Show created file
+      run: |
+        ls ${{ inputs.filename }}
+        cat ${{ inputs.filename }}
     - name: Upload
+      id: upload
       uses: actions/upload-artifact@v4
       with:
         name: ${{ inputs.filename }}
-        path: ${{ inputs.filename }}
+        path: ./${{ inputs.filename }}
         retention-days: 1
+    - name: Show artifact info
+      run: |
+        echo ${{ steps.upload.outputs.artifact-id }}
+        echo ${{ steps.upload.outputs.artifact-url }}
+        echo ${{ steps.upload.outputs.artifact-digest }}
   download:
     runs-on: ubuntu-latest
     needs: upload
