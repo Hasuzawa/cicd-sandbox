@@ -17,7 +17,7 @@ jobs:
           This is a log generated in github actions.
           It will be stored in cache.
         EOF
-        echo $(date) >> ${{ inputs.filename }}
+        echo Timestamp: $(date) >> ${{ inputs.filename }}
     - name: Show created file
       run: |
         ls ${{ inputs.filename }}
@@ -40,7 +40,8 @@ jobs:
     steps:
     - name: Download
       uses: actions/download-artifact@v4
-      with: ${{ inputs.filename }}
+      with:
+        name: ${{ inputs.filename }}
     - name: Print file
       run: cat ${{ inputs.filename }}
     - name: Show cache info
