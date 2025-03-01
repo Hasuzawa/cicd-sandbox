@@ -1,5 +1,4 @@
 name: Callable Workflow
-run_name: Called Workflow
 
 on:
   workflow_call:
@@ -11,12 +10,10 @@ on:
         type: number
         default: 17
     outputs:
-      sum:
-        type: number
+      sum: # no type field for workflow output
         description: The sum of inputs
         value: ${{ jobs.calculate.outputs.sum }}
       difference:
-        type: number
         description: The difference of inputs
         value: ${{ jobs.calculate.outputs.difference }}
 
