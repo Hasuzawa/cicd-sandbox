@@ -21,8 +21,8 @@ jobs:
   calculate:
     runs-on: ubuntu-latest
     outputs:
-      sum: ${{ steps.sum.outputs }}
-      difference: ${{ steps.difference.outputs }}
+      sum: ${{ steps.sum.outputs.sum }}
+      difference: ${{ steps.difference.outputs.difference }}
     steps:
     - name: Show env GITHUB_OUTPUT
       run: |
@@ -48,3 +48,7 @@ jobs:
         echo $GITHUB_OUTPUT
         ls -al $GITHUB_OUTPUT
         cat $GITHUB_OUTPUT
+    - name: Show workflow outputs
+      run: |
+        echo ${{ steps.sum.outputs.sum }}
+        echo ${{ steps.difference.outputs.difference }}
