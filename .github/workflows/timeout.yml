@@ -1,0 +1,29 @@
+name: Timeout a Step
+
+on:
+  workflow_dispatch:
+
+jobs:
+  timeout-and-fail:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Start
+      run: echo start
+    - name: This step will hang
+      timeout-minutes: 1
+      run: tail -f /dev/null
+    - name: End
+      run: echo end
+  timeout-no-fail:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Start
+      run: echo start
+    - name: This step will hang
+      id: hanging-step
+      timeout-minutes: 2
+      run: tail -f /dev/null
+    - name: Print last step status
+      run: echo steps.hanging-step.status
+    - name: End
+      run: echo end
