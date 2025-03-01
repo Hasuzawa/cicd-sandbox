@@ -1,7 +1,7 @@
 name: different input types
 on:
   workflow_dispatch:
-    input:
+    inputs:
       num1:
         type: number
         description: num1
@@ -17,6 +17,7 @@ on:
       square:
         type: boolean
         description: square the result
+        required: false
       weather:
         type: choice
         options:
