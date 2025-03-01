@@ -5,7 +5,7 @@ on:
 
 
 jobs:
-  # by default, run jobs from top to bottom
+  # by default, jobs are run in parallel
   job_A:
     runs-on: ubuntu-latest
     steps:
