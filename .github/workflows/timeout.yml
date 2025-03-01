@@ -12,7 +12,7 @@ jobs:
     - name: This step will hang
       timeout-minutes: 1
       run: tail -f /dev/null
-    - name: End
+    - name: End   # this step will not run because last step will terminate job
       run: echo end
   timeout-no-fail:
     runs-on: ubuntu-latest
@@ -23,6 +23,7 @@ jobs:
       id: hanging-step
       timeout-minutes: 2
       run: tail -f /dev/null
+      continue-on-error: true
     - name: Print last step status
       run: echo steps.hanging-step.status
     - name: End
