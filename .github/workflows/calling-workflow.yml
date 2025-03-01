@@ -16,4 +16,4 @@ jobs:
     - name: Show output of called workflow
       run: |
         echo ${{ needs.call.outputs.sum }}
-        echo ${{ needs.call.outputs.differnce }}
+        echo ${{ needs.call.outputs.difference }}
