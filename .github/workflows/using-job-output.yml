@@ -1,0 +1,45 @@
+name: Using output of another job
+
+on:
+  workflow_dispatch:
+    inputs:
+      runner:
+        type: string
+        default: ubuntu-latest
+
+jobs:
+  prepare:
+    runs-on: ${{ inputs.runner }}
+    steps:
+    - name: Get Ingredients
+      run: |
+        echo take out egg
+        echo take out butter
+        echo get flour
+        echo get sugar
+    outputs:
+      ingredients: egg,butter,flour,sugar
+      prepared: true
+  mix:
+    runs-on: ${{ inputs.runner }}
+    needs: prepare
+    steps:
+    - name: Check Ingredients
+      run: echo ${{ needs.prepare.outputs.ingredients }}
+    - name: Fail if not prepared
+      if: ${{ ! needs.prepare.outputs.prepared }}
+      run: exit 1
+    - name: Mix Ingredients
+      name: echo ingredients mixed
+    outputs:
+      dough: dough
+      mixed: true
+  bake:
+    runs-on: $${{ inputs.runner }}
+    needs: mix
+    steps:
+    - name: Fail if not mixed
+      if: ${{ ! needs.mix.outpus.mixed }}
+      run: exit 1
+    - name: Bake the cake
+      run: echo baking the cake...
