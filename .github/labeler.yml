@@ -1,11 +1,14 @@
 frontend:
 - any:
   - changed-files:
-    - any-blob-to-any-file: frontend/**/*
+    - any-glob-to-any-file:
+      - frontend/**/*
 backend:
 - any:
   - changed-files:
-    - any-blob-to-any-file: backend/**/*
+    - any-glob-to-any-file:
+      - backend/**/*
 feature:
 - any:
-  - head-branch: ^feature
+  - head-branch:
+    - ^feature/
