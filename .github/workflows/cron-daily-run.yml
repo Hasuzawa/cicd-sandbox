@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: This workflow is run daily
-      run: echo
+      run: echo $(date)
