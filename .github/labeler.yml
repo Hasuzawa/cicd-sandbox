@@ -6,9 +6,9 @@ frontend:
 backend:
 - any:
   - changed-files:
-    - any-glob-to-any-file:
+    - any-glob-to-any-file:   # match by file changed
       - backend/**/*
-feature:
+feature:  # tag name
 - any:
-  - head-branch:
+  - head-branch:  # match by branch name
     - ^feature/
