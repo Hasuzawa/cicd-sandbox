@@ -1,0 +1,59 @@
+name: Status Checks
+
+on:
+  workflow_dispatch:
+
+jobs:
+  success:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Success
+      if: ${{ success() }}    # this is the default if not specified
+      run: echo success
+    - name: Cancelled
+      if: ${{ cancelled() }}
+      run: echo cancelled
+    - name: Failure
+      if: ${{ failure() }}
+      run: echo failure
+    - name: Alaways
+      if: ${{ always() }}
+      run: echo always
+
+  fail:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Will timeout
+      timeout-minutes: 1
+      run: tail -f /dev/null
+    - name: Success
+      if: ${{ success() }}
+      run: echo success
+    - name: Cancelled
+      if: ${{ cancelled() }}
+      run: echo cancelled
+    - name: Failure
+      if: ${{ failure() }}
+      run: echo failure
+    - name: Alaways
+      if: ${{ always() }}
+      run: echo always
+
+  cancel:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Will timeout (manually cancel this job)
+      timeout-minutes: 3
+      run: tail -f /dev/null
+    - name: Success
+      if: ${{ success() }}
+      run: echo success
+    - name: Cancelled
+      if: ${{ cancelled() }}
+      run: echo cancelled
+    - name: Failure
+      if: ${{ failure() }}
+      run: echo failure
+    - name: Alaways
+      if: ${{ always() }}
+      run: echo always
