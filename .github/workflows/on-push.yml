@@ -1,0 +1,13 @@
+name: main branch is Updated
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+    - name: notify
+      run: echo main branch is udpated
