@@ -12,6 +12,9 @@ jobs:
         echo Timestamp: $(date) > cache.log
     - name: Cache file
       id: caching
+      # this action will add a Post {step_name} step in workflow
+      # if there is no change or move of the cached files,
+      # you don't have to manually save them.
       uses: actions/cache@v4
       with:
         key: cache-workflow-log
