@@ -1,0 +1,25 @@
+name: Using Cache
+
+on:
+  workflow_dispatch:
+
+jobs:
+  cache:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Produce cache file
+      run: |
+        echo Timestamp: $(date) > cache.log
+    - name: Cache file
+      id: caching
+      uses: actions/cache@v4
+      with:
+        key: cache-workflow-log
+        path: cache.log   # files to cache
+    - name: Show Cache Result
+      run: echo ${{ steps.caching.outputs.cache-hit }}
+    - name: Show cached file
+      if: ${{ steps.caching.outputs.cache-hit == 'true' }}
+      run: |
+        ls -al cache.log
+        cat cache.log
