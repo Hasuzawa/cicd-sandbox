@@ -24,3 +24,5 @@ app.get("/buy",  async (_: Request, res: Response<Product>) => {
 app.get("/sell", async (_: Request, res: Response) => {
 	res.status(StatusCodes.OK).json({})
 })
+
+app.listen(8080)

@@ -4,3 +4,4 @@ infra/secret
 
 # JS / TS
 **/node_modules/
+app/dist/
