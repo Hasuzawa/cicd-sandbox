@@ -20,6 +20,10 @@ jobs:
         echo job env: $count
         echo step env: $tea
     - name: echo repo vars
+      env:
+        REPO_ENV_VAR: ${{ vars.REPO_ENV_VAR }}
+        REPO_ENV_SECRET: ${{ vars.REPO_ENV_SECRET }} # do not print this in real project
       run: |
         echo $REPO_ENV_VAR
         echo $REPO_ENV_SECRET
+        env
