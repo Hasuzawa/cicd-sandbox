@@ -22,8 +22,9 @@ jobs:
     - name: echo repo vars
       env:
         REPO_ENV_VAR: ${{ vars.REPO_ENV_VAR }}
-        REPO_ENV_SECRET: ${{ vars.REPO_ENV_SECRET }} # do not print this in real project
+        REPO_ENV_SECRET: ${{ vars.REPO_ENV_SECRET }}
+      # the secert will be redacted from log
       run: |
         echo $REPO_ENV_VAR
         echo $REPO_ENV_SECRET
-        env
+        env | grep -i ^REPO
