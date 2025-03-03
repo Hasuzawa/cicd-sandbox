@@ -1,0 +1,25 @@
+name: Using Env Vars
+
+on:
+  workflow_dispatch:
+
+env:  # workflow env
+  season: summer
+
+jobs:
+  print_env:
+    runs-on: ubuntu-latest
+    env:
+      count: 7
+    steps:
+    - name: echo env vars
+      env: # step env
+        tea: green
+      run: |
+        echo workflow env: $season
+        echo job env: $count
+        echo step env: $tea
+    - name: echo repo vars
+      run: |
+        echo $REPO_ENV_VAR
+        echo $REPO_ENV_SECRET
