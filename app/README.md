@@ -9,8 +9,12 @@ Using Docker, we can build an image and deploy it.
 Use the TS compiler to compile the TS code into a dist/ output, which can be run using node.
 
 ```sh
+# Compile project into executable code
 npm run build
+# Build Docker image
+docker build -f Dockerfile -t shop:1.0.0 .
 ```
+
 
 # Version
 
