@@ -6,12 +6,11 @@ resource "aws_ecr_repository" "ecr" {
   }
 }
 
-data "aws_ecr_image" "shop" {
+data "aws_ecr_image" "image" {
   repository_name = var.ecr_repo_name
   most_recent     = true
 }
 
-variable "ecr_repo_name" {
-  type    = string
-  default = "dev-images"
+output "image" {
+  value = data.aws_ecr_image.image
 }
