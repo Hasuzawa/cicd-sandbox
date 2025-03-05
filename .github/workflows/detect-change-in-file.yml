@@ -10,8 +10,7 @@ jobs:
     - name: checkout repo
       uses: actions/checkout@v4
     - name: print hashes
-      run: |
-        echo ${{ hashFiles('app/src/**/*') }}
+      run: ${{ hashFiles('app/src/**/*') }}
     - name: download cache
       id: cache
       uses: actions/cache@v4
@@ -19,7 +18,5 @@ jobs:
         path: .
         key: src-${{ hashFiles('app/src/**/*') }}
     - name: check cache hit
-      if: ${{ steps.cache.outputs.cache-hit != 'true' }}
       run: |
-        echo hash is different
-        echo app/src changed!
+        cache-hit: ${{ steps.cache.outputs.cache-hit != 'true' }}
