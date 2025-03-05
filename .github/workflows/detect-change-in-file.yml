@@ -17,5 +17,5 @@ jobs:
       with:
         path: .
         key: src-${{ hashFiles('app/src/**/*') }}
-    - name: "cache-hit: ${{ steps.cache.outputs.cache-hit != 'true' }}"
+    - name: "cache-hit: ${{ steps.cache.outputs.cache-hit == 'true' }}"
       run: ""
