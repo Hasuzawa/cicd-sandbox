@@ -18,7 +18,7 @@ jobs:
         mv src.hash past.hash
     - name: hash main.tf
       run: |
-        echo ${{ hashfile('app/src/**/*') }} > src.hash
+        echo ${{ hashFiles('app/src/**/*') }} > src.hash
     - name: print hashes
       id: compare
       run: |
