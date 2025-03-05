@@ -9,14 +9,11 @@ jobs:
     steps:
     - name: checkout repo
       uses: actions/checkout@v4
-    - name: print hashes
-      run: ${{ hashFiles('app/src/**/*') }}
+    - name: "hash: ${{ hashFiles('app/src/**/*') }}"
     - name: download cache
       id: cache
       uses: actions/cache@v4
       with:
         path: .
         key: src-${{ hashFiles('app/src/**/*') }}
-    - name: check cache hit
-      run: |
-        cache-hit: ${{ steps.cache.outputs.cache-hit != 'true' }}
+    - name: "cache-hit: ${{ steps.cache.outputs.cache-hit != 'true' }}"
