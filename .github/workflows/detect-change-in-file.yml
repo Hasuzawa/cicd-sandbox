@@ -9,28 +9,17 @@ jobs:
     steps:
     - name: checkout repo
       uses: actions/checkout@v4
-    - name: download artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: src.hash
-    - name: rename past hash
-      run: |
-        mv src.hash past.hash
-    - name: hash main.tf
-      run: |
-        echo ${{ hashFiles('app/src/**/*') }} > src.hash
     - name: print hashes
-      id: compare
       run: |
-        echo "past=$(cat past.hash)" >> $GITHUB_OUTPUT
-        echo "current=$(cat src.hash)" >> $GITHUB_OUTPUT
-    - name: compare hash
-      if: ${{ steps.outputs.past == steps.outputs.current }}
-      run: |
-        echo hash are same!
-    - name: upload artifact
-      uses: actions/upload-artifact@v4
+        echo ${{ hashFiles('app/src/**/*') }}
+    - name: download cache
+      id: cache
+      uses: actions/cache@v4
       with:
-        name: src.hash
-        retention-days: 1
-        overwrite: true
+        path: .
+        key: src-${{ hashFiles('app/src/**/*') }}
+    - name: check cache hit
+      if: ${{ steps.cache.outputs.cache-hit != 'true' }}
+      run: |
+        echo hash is different
+        echo app/src changed!
