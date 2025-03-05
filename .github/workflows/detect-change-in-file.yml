@@ -1,0 +1,36 @@
+name: Detect Change in File
+
+on:
+  workflow_dispatch:
+
+jobs:
+  hash:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout repo
+      uses: actions/checkout@v4
+    - name: download artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: src.hash
+    - name: rename past hash
+      run: |
+        mv src.hash past.hash
+    - name: hash main.tf
+      run: |
+        echo ${{ hashfile('app/src/**/*') }} > src.hash
+    - name: print hashes
+      id: compare
+      run: |
+        echo "past=$(cat past.hash)" >> $GITHUB_OUTPUT
+        echo "current=$(cat src.hash)" >> $GITHUB_OUTPUT
+    - name: compare hash
+      if: ${{ steps.outputs.past == steps.outputs.current }}
+      run: |
+        echo hash are same!
+    - name: upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: src.hash
+        retention-days: 1
+        overwrite: true
