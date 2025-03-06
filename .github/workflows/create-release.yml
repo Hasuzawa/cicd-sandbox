@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: release
-      with:
+      env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         gh release create v${{ inputs.tag }} --generate-notes
