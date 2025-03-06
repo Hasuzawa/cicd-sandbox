@@ -1,0 +1,17 @@
+name: Create Release
+
+on:
+  workflow_dipatch:
+    inputs:
+      tag:
+        type: string
+        default: 1.0.0
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: release
+      run: |
+        gh release create v${{ inputs.tag }} --generate-notes
+# this will also create the tag in git, which you can later fetch using git fetch --tags
