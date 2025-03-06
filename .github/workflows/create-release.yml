@@ -13,7 +13,7 @@ jobs:
     steps:
     - name: release
       with:
-        GH_TOKEN: ${{ secrets.github_token }}
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         gh release create v${{ inputs.tag }} --generate-notes
 # this will also create the tag in git, which you can later fetch using git fetch --tags
