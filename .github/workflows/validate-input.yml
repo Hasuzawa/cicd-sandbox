@@ -1,0 +1,34 @@
+name: Validate Inputs
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        default: 1.2.3
+        description: x.y.z where 0 <= x, y, z <= 9
+      name:
+        type: string
+        default: Mary Peter
+
+jobs:
+  validate-inputs:
+    runs-on: ubuntu-latest
+    steps:
+    - name: validate version
+      run: |
+        ok=1
+
+        if ![[ ${{ inputs.version }} == [0-9].[0-9].[0-9] ]]; then
+          ok=0
+          echo invalid pattern by glob pattern
+        fi
+
+        if ![[ ${{ inputs.version }} =~ [0-9]+\.[0-9]+\.[0-9] }}  ]]; then
+          ok=0
+          echo invalid pattern by regex pattern
+        fi
+
+        if [[ $ok == 0 ]]; then
+          exit 1
+        fi
