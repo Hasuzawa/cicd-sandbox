@@ -7,9 +7,6 @@ on:
         type: string
         default: 1.2.3
         description: x.y.z where 0 <= x, y, z <= 9
-      name:
-        type: string
-        default: Mary Peter
 
 jobs:
   validate-inputs:
@@ -18,7 +15,7 @@ jobs:
     - name: validate version
       run: |
         ok=1
-        version=${{ intputs.version }}
+        version=${{ inputs.version }}
 
         if [[ ! $version == [0-9].[0-9].[0-9] ]]
         then
