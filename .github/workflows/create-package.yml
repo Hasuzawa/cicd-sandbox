@@ -3,13 +3,16 @@ name: Create Package
 on:
   workflow_dispatch:
     inputs:
-      tag:
+      version:
         type: string
         default: 1.0.0
+      registry:
+        type: string
+        default: ghcr.io
 
 env:
-  image_name: ${{ github.repository.lowercase }}
-  image_source: ${{ github.server_url/github.repository.lowercase }}
+  image_tag: "${{ inputs.registry }}/${{ github.repository.lowercase }}:${{ inputs.version }}"
+  image_source: ${{ github.server_url }}/${{ github.repository.lowercase }}
 
 jobs:
   pack:
@@ -18,16 +21,16 @@ jobs:
     - name: build image
       run: |
         docker build
-          --tag ghcr.io/$image_name \
+          --tag $image_tag \
           --file app/Dockerfile \
-          --label version=${{ inputs.tag }}
+          --label version=${{ inputs.version }}
           --label "org.opencontainers.image.source=$image_source \
           --label "org.opencontainers.image.description='Simple container'" \
           --label "org.opencontainers.image.licenses=MIT" \
           ./app
     - name: login registry
       run: |
-        docker login ghcr.io -u GITHUB --password-stdin $GITHUB_TOKEN
+        docker login ${{ inputs.registry }} -u GITHUB --password-stdin $GITHUB_TOKEN
     - name: upload image
       run: |
-        docker push ghcr.io/$image_name:${{ inputs.tag }}
+        docker push $image_tag
