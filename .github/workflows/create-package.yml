@@ -36,7 +36,7 @@ jobs:
       id: build
       run: |
         cd app
-        npm install --omit=dev
+        npm install
         npm run build
     - uses: actions/upload-artifact@v4
       with:
