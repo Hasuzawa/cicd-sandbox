@@ -23,7 +23,7 @@ jobs:
           echo invalid pattern by glob pattern
         fi
 
-        if [[ ! $version =~ [0-9]+\.[0-9]+\.[0-9] }} ]]
+        if [[ ! $version =~ [0-9]+\.[0-9]+\.[0-9] ]]
         then
           ok=0
           echo invalid pattern by regex pattern
