@@ -23,20 +23,42 @@ jobs:
         lower=${name,,}
         echo $lower
         echo "REPO_NAME=$lower" >> $GITHUB_OUTPUT
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22.x
+    - name: build
+      id: build
+      run: |
+        npm install --omit=dev
+        npm run build
+    - uses: actions/upload-artifact@v4
+      with:
+        name: dist
+        path: ./app/dist
+        retention-days: 3
+
   pack:
     needs:
     - repository
+    - build
     runs-on: ubuntu-latest
     env:
       IMAGE_TAG: ${{ inputs.registry }}/${{ needs.repository.outputs.name }}:${{ inputs.version }}
       IMAGE_SRC: ${{ github.server_url }}/${{ needs.repository.outputs.name }}
     steps:
-    - name: checkout repository
-      uses: actions/checkout@v4
+    - uses: actions/download-artifact@v4
+      with:
+        name: dist
     - name: show image info
       run: |
         echo $IMAGE_TAG
         echo $IMAGE_SRC
+        ls -al dist
     - name: build image
       run: |
         docker build \
@@ -46,7 +68,7 @@ jobs:
           --label "org.opencontainers.image.source=$IMAGE_SRC" \
           --label "org.opencontainers.image.description='simple container'" \
           --label "org.opencontainers.image.licenses=MIT" \
-          ./app
+          .
     - name: login registry
       run: |
         docker login ${{ inputs.registry }} -u GITHUB --password-stdin $GITHUB_TOKEN
