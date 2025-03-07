@@ -57,11 +57,12 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         name: dist
+        path: app/
     - name: show image info
       run: |
         echo $IMAGE_TAG
         echo $IMAGE_SRC
-        ls -al dist
+        ls -al app/dist
     - name: build image
       run: |
         cd app
