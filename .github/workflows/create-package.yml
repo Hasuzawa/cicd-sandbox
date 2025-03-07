@@ -38,6 +38,8 @@ jobs:
         cd app
         npm install
         npm run build
+        pwd
+        ls -al
     - uses: actions/upload-artifact@v4
       with:
         name: dist
