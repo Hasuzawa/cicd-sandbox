@@ -20,15 +20,15 @@ jobs:
         ok=1
 
         if [[ ! ${{ inputs.version }} == [0-9].[0-9].[0-9] ]]; then
-          ok=0
-          echo invalid pattern by glob pattern
+          ok=0;
+          echo invalid pattern by glob pattern;
         fi
 
-        if [[ ! ${{ inputs.version }} =~ [0-9]+\.[0-9]+\.[0-9] }}  ]]; then
-          ok=0
-          echo invalid pattern by regex pattern
+        if [[ ! ${{ inputs.version }} =~ [0-9]+\.[0-9]+\.[0-9] }} ]]; then
+          ok=0;
+          echo invalid pattern by regex pattern;
         fi
 
         if [[ $ok == 0 ]]; then
-          exit 1
+          exit 1;
         fi
