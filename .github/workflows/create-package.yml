@@ -62,7 +62,8 @@ jobs:
       run: |
         echo $IMAGE_TAG
         echo $IMAGE_SRC
-        ls -al app/dist
+        ls -al
+        ls -al app
     - name: build image
       run: |
         cd app
