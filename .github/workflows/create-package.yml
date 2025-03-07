@@ -20,15 +20,20 @@ jobs:
       id: format
       run: |
         name=${{ github.repository }}
-        echo "repo_name=${name,,}" >> GITHUB_OUTPUT
+        lower=${name,,}
+        echo "repo_name=$lower" >> GITHUB_OUTPUT
   pack:
     needs:
     - repository
     runs-on: ubuntu-latest
     env:
-      IMAGE_TAG: "${{ inputs.registry }}/${{ needs.repository.outputs.name }}:${{ inputs.version }}"
+      IMAGE_TAG: ${{ inputs.registry }}/${{ needs.repository.outputs.name }}:${{ inputs.version }}
       IMAGE_SRC: ${{ github.server_url }}/${{ needs.repository.outputs.name }}
     steps:
+    - name: show image info
+      run: |
+        echo $IMAGE_TAG
+        echo $IMAGE_SRC
     - name: build image
       run: |
         docker build \
