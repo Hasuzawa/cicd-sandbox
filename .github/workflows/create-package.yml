@@ -14,14 +14,15 @@ jobs:
   repository:
     runs-on: ubuntu-latest
     outputs:
-      name: ${{ steps.format.repo_name }}
+      name: ${{ steps.format.REPO_NAME }}
     steps:
     - name: format repository name
       id: format
       run: |
         name=${{ github.repository }}
         lower=${name,,}
-        echo "repo_name=$lower" >> GITHUB_OUTPUT
+        echo $lower
+        echo "REPO_NAME=$lower" >> $GITHUB_OUTPUT
   pack:
     needs:
     - repository
@@ -39,7 +40,7 @@ jobs:
         docker build \
           --tag $IMAGE_TAG \
           --file app/Dockerfile \
-          --label version=${{ inputs.version }}
+          --label version=${{ inputs.version }} \
           --label "org.opencontainers.image.source=$IMAGE_SRC" \
           --label "org.opencontainers.image.description='simple container'" \
           --label "org.opencontainers.image.licenses=MIT" \
