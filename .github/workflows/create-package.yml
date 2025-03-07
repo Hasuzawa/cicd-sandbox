@@ -10,21 +10,32 @@ on:
         type: string
         default: ghcr.io
 
-env:
-  image_tag: "${{ inputs.registry }}/${{ github.repository.lowercase }}:${{ inputs.version }}"
-  image_source: ${{ github.server_url }}/${{ github.repository.lowercase }}
-
 jobs:
-  pack:
+  repository:
     runs-on: ubuntu-latest
+    outputs:
+      name: ${{ steps.format.repo_name }}
+    steps:
+    - name: format repository name
+      id: format
+      run: |
+        name=${{ github.repository }}
+        echo "repo_name=${name,,}" >> GITHUB_OUTPUT
+  pack:
+    needs:
+    - repository
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_TAG: "${{ inputs.registry }}/${{ jobs.repository.outputs.name }}:${{ inputs.version }}"
+      IMAGE_SRC: ${{ github.server_url }}/${{ jobs.repository.outputs.name }}
     steps:
     - name: build image
       run: |
-        docker build
-          --tag $image_tag \
+        docker build \
+          --tag $IMAGE_TAG \
           --file app/Dockerfile \
           --label version=${{ inputs.version }}
-          --label "org.opencontainers.image.source=$image_source \
+          --label "org.opencontainers.image.source=$IMAGE_SRC" \
           --label "org.opencontainers.image.description='Simple container'" \
           --label "org.opencontainers.image.licenses=MIT" \
           ./app
