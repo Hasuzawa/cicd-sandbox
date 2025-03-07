@@ -1,0 +1,27 @@
+name: Create Package
+
+on:
+  workflow_dispatch:
+    input:
+      tag:
+        type: string
+        defualt: 1.0.0
+
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    steps:
+    - name: build image
+      run: |
+        docker build
+          --tag ${{ github.repository }} \
+          --file app/Dockerfile \
+          --label "org.opencontainers.image.source=https://github.com/Hasuzawa/cicd-sandbox" \
+          --label "org.opencontainers.image.description=Simple container." \
+          --label "org.opencontainers.image.licenses=MIT"
+    - name: login registry
+      run: |
+        docker login ghcr.io -u GITHUB --password-stdin $GITHUB_TOKEN
+    - name: upload image
+      run: |
+        docker push ghcr.io/${{ github.repository }}:${{ inputs.tag }}
