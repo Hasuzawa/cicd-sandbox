@@ -1,0 +1,27 @@
+name: Bash Expressions
+
+on:
+  workflow_dispatch:
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+    - name: lowercase & uppercase
+      run: |
+        name='Rosemary Benedict'
+        echo ${name,,}
+        echo ${name^^}
+
+        name='benjamin-taylor congent'
+        echo ${name,}
+        echo ${name^}
+    - name: default value
+      run: |
+        y=${x:-7}
+        echo $x
+        echo $y
+
+        z=${x:=3}
+        echo $x
+        echo $z
