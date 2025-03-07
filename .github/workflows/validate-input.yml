@@ -19,12 +19,12 @@ jobs:
       run: |
         ok=1
 
-        if ![[ ${{ inputs.version }} == [0-9].[0-9].[0-9] ]]; then
+        if [[ ! ${{ inputs.version }} == [0-9].[0-9].[0-9] ]]; then
           ok=0
           echo invalid pattern by glob pattern
         fi
 
-        if ![[ ${{ inputs.version }} =~ [0-9]+\.[0-9]+\.[0-9] }}  ]]; then
+        if ![[ ! ${{ inputs.version }} =~ [0-9]+\.[0-9]+\.[0-9] }}  ]]; then
           ok=0
           echo invalid pattern by regex pattern
         fi
