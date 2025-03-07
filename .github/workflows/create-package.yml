@@ -32,7 +32,7 @@ jobs:
       IMAGE_SRC: ${{ github.server_url }}/${{ needs.repository.outputs.name }}
     steps:
     - name: checkout repository
-      runs: actions/checkout@v4
+      uses: actions/checkout@v4
     - name: show image info
       run: |
         echo $IMAGE_TAG
