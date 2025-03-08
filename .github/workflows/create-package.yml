@@ -77,9 +77,10 @@ jobs:
       env:
         CR_PAT: ${{ secrets.CR_PAT }}   # container registry pat
       run: |
-        docker login ${{ inputs.registry }} \
-          --username GITHUB \
-          --password-stdin $CR_PAT
+        echo "$CR_PAT" |
+          docker login ${{ inputs.registry }} \
+            --username GITHUB \
+            --password-stdin
     - name: upload image
       run: |
         docker push $IMAGE_TAG
