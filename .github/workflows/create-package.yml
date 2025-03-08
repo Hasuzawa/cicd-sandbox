@@ -46,7 +46,7 @@ jobs:
 
   publish:
     needs:
-    - repository
+    - format
     - build
     runs-on: ubuntu-latest
     env:
