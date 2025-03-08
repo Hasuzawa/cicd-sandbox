@@ -52,6 +52,8 @@ jobs:
     env:
       # this will be ghcr.io/{author_name}/{repository_name}:version
       # IMAGE_TAG: ${{ inputs.registry }}/${{ needs.format.outputs.name }}:${{ inputs.version }}
+
+      # to use a different name, it is best to label the image with source
       IMAGE_TAG: ${{ inputs.registry }}/${{ github.repository_owner }}/shop:${{ inputs.version }}
       IMAGE_SRC: ${{ github.server_url }}/${{ needs.format.outputs.name }}
     steps:
