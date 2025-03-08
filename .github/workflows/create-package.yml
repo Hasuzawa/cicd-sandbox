@@ -68,7 +68,7 @@ jobs:
       run: |
         cd app
         docker build \
-          --tag ${$IMAGE_TAG,,} \
+          --tag ${IMAGE_TAG,,} \
           --file Dockerfile \
           --label version=${{ inputs.version }} \
           --label "org.opencontainers.image.source=$IMAGE_SRC" \
@@ -85,4 +85,4 @@ jobs:
             --password-stdin
     - name: upload image
       run: |
-        docker push ${$IMAGE_TAG,,}
+        docker push ${IMAGE_TAG,,}
