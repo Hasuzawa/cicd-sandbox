@@ -52,7 +52,7 @@ jobs:
     env:
       # this will be ghcr.io/{author_name}/{repository_name}:version
       # IMAGE_TAG: ${{ inputs.registry }}/${{ needs.format.outputs.name }}:${{ inputs.version }}
-      IMAGE_TAG: ${{ inputs.registry }}/${ ${{ github.repository_owner }},, }/shop:${{ inputs.version }}
+      IMAGE_TAG: ${{ inputs.registry }}/${{ github.repository_owner }}/shop:${{ inputs.version }}
       IMAGE_SRC: ${{ github.server_url }}/${{ needs.format.outputs.name }}
     steps:
     - uses: actions/checkout@v4
@@ -68,7 +68,7 @@ jobs:
       run: |
         cd app
         docker build \
-          --tag $IMAGE_TAG \
+          --tag ${$IMAGE_TAG,,} \
           --file Dockerfile \
           --label version=${{ inputs.version }} \
           --label "org.opencontainers.image.source=$IMAGE_SRC" \
@@ -85,4 +85,4 @@ jobs:
             --password-stdin
     - name: upload image
       run: |
-        docker push $IMAGE_TAG
+        docker push ${$IMAGE_TAG,,}
